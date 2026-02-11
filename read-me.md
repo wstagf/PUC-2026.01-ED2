@@ -1,0 +1,1 @@
+Repositorio da disciplina de Estrutura de Dados 2 na Pontifícia Universidade Católica de Goiás (PUC Goiás). Este repositório contém os códigos e materiais relacionados às aulas e exercícios da disciplina, ministrada pelo professor Thiago.
