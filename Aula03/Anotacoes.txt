@@ -1,0 +1,61 @@
+Conceito de Árvore
+
+Árvore é uma estrutura de dados não linear organizada de forma hierárquica.
+Ela é composta por nós conectados por arestas.
+
+Elementos principais:
+
+Raiz: nó principal da árvore.
+
+Nó: cada elemento da estrutura.
+
+Aresta: ligação entre dois nós.
+
+Pai: nó que possui filhos.
+
+Filho: nó que depende de um pai.
+
+Folha: nó que não possui filhos.
+
+Nó interno: nó que possui pelo menos um filho.
+
+Subárvore: qualquer nó com seus descendentes.
+
+Altura e Nível
+
+Definição adotada na disciplina:
+
+Altura da árvore = número de arestas no maior caminho da raiz até uma folha.
+
+A raiz está no nível 0.
+
+Exemplo:
+Se o maior caminho da raiz até uma folha tem 3 arestas, então a altura é 3.
+
+Árvore Binária
+
+É aquela em que cada nó possui no máximo dois filhos:
+
+Filho esquerdo
+
+Filho direito
+
+Árvore Binária Cheia (Perfeita)
+
+Todos os níveis estão completamente preenchidos.
+
+Se a altura é h:
+
+Número total de nós:
+n = 2^(h+1) - 1
+
+Número de folhas:
+folhas = 2^h
+
+Número de nós internos:
+internos = 2^h - 1
+
+Árvore Binária Completa
+
+Todos os níveis estão preenchidos, exceto possivelmente o último.
+O último nível deve ser preenchido da esquerda para a direita.
