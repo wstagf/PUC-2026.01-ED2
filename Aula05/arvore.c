@@ -70,6 +70,22 @@ void imprimirArvore(No* raiz, int nivel) {
     imprimirArvore(raiz -> esq, nivel + 1);
 }
 
+void imprimirArvore2(No* raiz, int nivel, char lado) {
+    if(raiz == NULL) return;
+    // imprimimos primeiro o lado da direita
+    imprimirArvore2(raiz -> dir, nivel + 1, 'D');
+    for (int i = 0; i < nivel; i++) {
+        printf("    ");
+    }
+    printf("%d", raiz-> valor);
+    if(lado == "R") printf(" (R)");
+    else if( lado == "E") printf(" (E)");
+    else if( lado == "D") printf(" (D)");
+
+    printf("\n");
+    imprimirArvore2(raiz -> esq, nivel + 1, 'E');
+}
+
 
 int main() {
     No* raiz = criarNo(40);
@@ -79,7 +95,7 @@ int main() {
     raiz->esq->esq = criarNo(10);
     raiz->esq->dir = criarNo(30);
 
-    preOrdem(raiz);
+    // preOrdem(raiz);
 
     // Inserir os itens 
     // 25, 50, 70, 5, 35, 65, 80
@@ -98,9 +114,10 @@ int main() {
     raiz = inserir(raiz, 65);
     raiz = inserir(raiz, 80);
 
-    preOrdem(raiz);
-    
-    imprimirArvore(raiz, 0);
+    //preOrdem(raiz);
+    printf("AAA\n");
+    imprimirArvore2(raiz, 0, 'R');
+    printf("BBB\n");
     return 0;
 }
 
