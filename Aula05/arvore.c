@@ -59,6 +59,17 @@ No* inserir(No* raiz, int valor) {
     return raiz;
 }
 
+void imprimirArvore(No* raiz, int nivel) {
+    if(raiz == NULL) return;
+    // imprimimos primeiro o lado da direita
+    imprimirArvore(raiz -> dir, nivel + 1);
+    for (int i = 0; i < nivel; i++) {
+        printf("    ");
+    }
+    printf("%d\n", raiz-> valor);
+    imprimirArvore(raiz -> esq, nivel + 1);
+}
+
 
 int main() {
     No* raiz = criarNo(40);
@@ -79,13 +90,17 @@ int main() {
 
     // preOrdem(raiz);
 
+    // inserir
+    // 40  20  10  30  60  40  20  
+    // 10  30  25  60  50  75
     raiz = inserir(raiz, 5);
     raiz = inserir(raiz, 35);
     raiz = inserir(raiz, 65);
     raiz = inserir(raiz, 80);
 
     preOrdem(raiz);
-    // 40  20  10  30  60  40  20  10  30  25  60  50  75
+    
+    imprimirArvore(raiz, 0);
     return 0;
 }
 
