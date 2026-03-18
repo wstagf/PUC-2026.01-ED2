@@ -50,6 +50,9 @@ int main() {
     raiz->esq = criarNo(20);
     raiz->dir = criarNo(60);
 
+    raiz->esq->esq = criarNo(10);
+    raiz->esq->dir = criarNo(30);
+
     preOrdem(raiz);
 
     return 0;
