@@ -45,6 +45,21 @@ void emOrdem(No* raiz) {
 }
 
 
+No* inserir(No* raiz, int valor) {
+    if( raiz == NULL ) {
+        return criarNo(valor);
+    }
+
+    if( valor < raiz->valor) {
+        raiz -> esq = 
+            inserir(raiz->esq, valor);
+    } else {
+        raiz->dir = inserir(raiz->dir, valor);
+    }
+    return raiz;
+}
+
+
 int main() {
     No* raiz = criarNo(40);
     raiz->esq = criarNo(20);
@@ -55,6 +70,21 @@ int main() {
 
     preOrdem(raiz);
 
+    // Inserir os itens 
+    // 25, 50, 70, 5, 35, 65, 80
+
+    raiz = inserir(raiz, 25);
+    raiz = inserir(raiz, 50);
+    raiz = inserir(raiz, 70);
+
+    // preOrdem(raiz);
+
+    raiz = inserir(raiz, 5);
+    raiz = inserir(raiz, 35);
+    raiz = inserir(raiz, 65);
+    raiz = inserir(raiz, 80);
+
+    preOrdem(raiz);
     return 0;
 }
 
