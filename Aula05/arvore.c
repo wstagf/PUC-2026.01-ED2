@@ -7,117 +7,119 @@ typedef struct No {
     struct No* dir;
 } No;
 
+// Criar nó
 No* criarNo(int vlr) {
-    No* novo = 
-        (No*) malloc(sizeof(No));
+    No* novo = (No*) malloc(sizeof(No));
+
     if (novo == NULL) {
-        printf("Erro de alocacao \n");
+        printf("Erro de alocacao\n");
         exit(1);
     }
+
     novo->valor = vlr;
     novo->esq = NULL;
     novo->dir = NULL;
+
     return novo;
 }
 
+// Inserção ABB
+No* inserir(No* raiz, int valor) {
+    if (raiz == NULL) {
+        return criarNo(valor);
+    }
+
+    if (valor < raiz->valor) {
+        raiz->esq = inserir(raiz->esq, valor);
+    } else if (valor > raiz->valor) {
+        raiz->dir = inserir(raiz->dir, valor);
+    } else {
+        printf("Valor %d ja existe!\n", valor);
+    }
+
+    return raiz;
+}
+
+// Percursos
 void preOrdem(No* raiz) {
-    if(raiz !=NULL) {
-        printf(" %d ", raiz->valor);
+    if (raiz != NULL) {
+        printf("%d ", raiz->valor);
         preOrdem(raiz->esq);
         preOrdem(raiz->dir);
     }
 }
 
-void posOrdem(No* raiz) {
-    if(raiz !=NULL) {
-        posOrdem(raiz->esq);
-        posOrdem(raiz->dir);
-        printf(" %d ", raiz->valor);
-    }
-}
-
 void emOrdem(No* raiz) {
-    if(raiz !=NULL) {
+    if (raiz != NULL) {
         emOrdem(raiz->esq);
-        printf(" %d ", raiz->valor);
+        printf("%d ", raiz->valor);
         emOrdem(raiz->dir);
     }
 }
 
-
-No* inserir(No* raiz, int valor) {
-    if( raiz == NULL ) {
-        return criarNo(valor);
+void posOrdem(No* raiz) {
+    if (raiz != NULL) {
+        posOrdem(raiz->esq);
+        posOrdem(raiz->dir);
+        printf("%d ", raiz->valor);
     }
-
-    if( valor < raiz->valor) {
-        raiz -> esq = 
-            inserir(raiz->esq, valor);
-    } else {
-        raiz->dir = inserir(raiz->dir, valor);
-    }
-    return raiz;
 }
 
-void imprimirArvore(No* raiz, int nivel) {
-    if(raiz == NULL) return;
-    // imprimimos primeiro o lado da direita
-    imprimirArvore(raiz -> dir, nivel + 1);
+// Impressão visual melhorada
+void imprimirArvoreBonita(No* raiz, int nivel, char lado) {
+    if (raiz == NULL) return;
+
+    imprimirArvoreBonita(raiz->dir, nivel + 1, 'D');
+
     for (int i = 0; i < nivel; i++) {
         printf("    ");
     }
-    printf("%d\n", raiz-> valor);
-    imprimirArvore(raiz -> esq, nivel + 1);
+
+    printf("%d", raiz->valor);
+
+    if (lado == 'R') printf(" (R)");
+    else if (lado == 'E') printf(" (E)");
+    else if (lado == 'D') printf(" (D)");
+
+    printf("\n"); // uma quebra por nó
+
+    imprimirArvoreBonita(raiz->esq, nivel + 1, 'E');
 }
 
-void imprimirArvore2(No* raiz, int nivel, char lado) {
-    if(raiz == NULL) return;
-    // imprimimos primeiro o lado da direita
-    imprimirArvore2(raiz -> dir, nivel + 1, 'D');
-    for (int i = 0; i < nivel; i++) {
-        printf("    ");
+// Liberar memória
+void liberarArvore(No* raiz) {
+    if (raiz != NULL) {
+        liberarArvore(raiz->esq);
+        liberarArvore(raiz->dir);
+        free(raiz);
     }
-    printf("%d", raiz-> valor);
-    if(lado == "R") printf(" (R)");
-    else if( lado == "E") printf(" (E)");
-    else if( lado == "D") printf(" (D)");
-
-    printf("\n");
-    imprimirArvore2(raiz -> esq, nivel + 1, 'E');
 }
 
-
+// MAIN
 int main() {
-    No* raiz = criarNo(40);
-    raiz->esq = criarNo(20);
-    raiz->dir = criarNo(60);
 
-    raiz->esq->esq = criarNo(10);
-    raiz->esq->dir = criarNo(30);
+    No* raiz = NULL;
 
-    // preOrdem(raiz);
+    int valores[] = {40, 20, 60, 10, 30, 25, 50, 70, 5, 35, 65, 80};
+    int n = sizeof(valores) / sizeof(valores[0]);
 
-    // Inserir os itens 
-    // 25, 50, 70, 5, 35, 65, 80
+    for (int i = 0; i < n; i++) {
+        raiz = inserir(raiz, valores[i]);
+    }
 
-    raiz = inserir(raiz, 25);
-    raiz = inserir(raiz, 50);
-    raiz = inserir(raiz, 70);
+    printf("\nPre-ordem:\n");
+    preOrdem(raiz);
 
-    // preOrdem(raiz);
+    printf("\n\nEm-ordem:\n");
+    emOrdem(raiz);
 
-    // inserir
-    // 40  20  10  30  60  40  20  
-    // 10  30  25  60  50  75
-    raiz = inserir(raiz, 5);
-    raiz = inserir(raiz, 35);
-    raiz = inserir(raiz, 65);
-    raiz = inserir(raiz, 80);
+    printf("\n\nPos-ordem:\n");
+    posOrdem(raiz);
 
-    //preOrdem(raiz);
-    printf("AAA\n");
-    imprimirArvore2(raiz, 0, 'R');
-    printf("BBB\n");
+    printf("\n\nArvore:\n");
+    imprimirArvoreBonita(raiz, 0, 'R');
+
+    liberarArvore(raiz);
+
     return 0;
 }
-
