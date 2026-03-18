@@ -20,12 +20,37 @@ No* criarNo(int vlr) {
     return novo;
 }
 
+void preOrdem(No* raiz) {
+    if(raiz !=NULL) {
+        printf(" %d ", raiz->valor);
+        preOrdem(raiz->esq);
+        preOrdem(raiz->dir);
+    }
+}
+
+void posOrdem(No* raiz) {
+    if(raiz !=NULL) {
+        posOrdem(raiz->esq);
+        posOrdem(raiz->dir);
+        printf(" %d ", raiz->valor);
+    }
+}
+
+void emOrdem(No* raiz) {
+    if(raiz !=NULL) {
+        emOrdem(raiz->esq);
+        printf(" %d ", raiz->valor);
+        emOrdem(raiz->dir);
+    }
+}
+
 
 int main() {
     No* raiz = criarNo(40);
     raiz->esq = criarNo(20);
     raiz->dir = criarNo(60);
 
+    preOrdem(raiz);
 
     return 0;
 }
