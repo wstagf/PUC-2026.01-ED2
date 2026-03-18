@@ -85,6 +85,7 @@ int main() {
     raiz = inserir(raiz, 80);
 
     preOrdem(raiz);
+    // 40  20  10  30  60  40  20  10  30  25  60  50  75
     return 0;
 }
 
