@@ -5,7 +5,7 @@ typedef struct No {
     int valor;
     struct No* esq;
     struct No* dir;
-}
+} No;
 
 No* criarNo(int vlr) {
     No* novo = 
@@ -17,5 +17,16 @@ No* criarNo(int vlr) {
     novo->valor = vlr;
     novo->esq = NULL;
     novo->dir = NULL;
+    return novo;
+}
+
+
+int main() {
+    No* raiz = criarNo(40);
+    raiz->esq = criarNo(20);
+    raiz->dir = criarNo(60);
+
+
+    return 0;
 }
 
